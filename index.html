@@ -50,10 +50,20 @@
   .btn-quote:hover { background:var(--gold-light); transform:translateY(-1px); }
 
   /* ── HERO ── */
-  .hero {
+  /* .hero {
     background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);
     text-align:center; padding:90px 10% 80px;
     position:relative; overflow:hidden;
+  } */
+  .hero {
+    background-image: url(asset/hero-bg.webp);
+    background-repeat: no-repeat;      /* Prevents repetition */
+    background-size: cover;             /* Scales image to cover the section */
+    background-position: center;        /* Centers the image */
+    text-align: center;
+    padding: 90px 10% 80px;
+    position: relative;
+    overflow: hidden;
   }
   .hero::before {
     content:''; position:absolute; inset:0;
@@ -220,6 +230,57 @@
   .footer-divider { border:none; border-top:1px solid rgba(255,255,255,.1); margin-bottom:20px; }
   .footer-bottom { display:flex; justify-content:space-between; font-size:12px; flex-wrap:wrap; gap:8px; }
 
+  /* ── CAREER ── */
+  .career-section { background:var(--light-bg); padding:80px 8%; }
+  .career-header { text-align:center; margin-bottom:48px; }
+  .career-intro { color:var(--muted); font-size:15px; max-width:540px; margin:0 auto; line-height:1.75; }
+  .career-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:56px; }
+  .job-card {
+    background:var(--white); border-radius:14px; padding:30px 26px;
+    border:1px solid var(--border); position:relative;
+    transition:transform .2s, box-shadow .2s;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .job-card:hover { transform:translateY(-5px); box-shadow:0 12px 36px rgba(0,0,0,.1); }
+  .job-card.featured { border:2px solid var(--gold); background:#fffdf5; }
+  .job-badge {
+    display:inline-block; font-size:11px; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase;
+    background:var(--light-bg); color:var(--muted);
+    padding:4px 10px; border-radius:20px; width:fit-content;
+  }
+  .gold-badge { background:var(--gold); color:var(--navy) !important; }
+  .job-icon {
+    width:46px; height:46px; background:linear-gradient(135deg,var(--navy),var(--navy-mid));
+    border-radius:10px; display:flex; align-items:center; justify-content:center;
+  }
+  .job-icon svg { width:22px; height:22px; stroke:#fff; }
+  .job-card h3 { font-family:'Playfair Display',serif; font-size:18px; color:var(--navy); }
+  .job-location { font-size:13px; color:var(--muted); }
+  .job-desc { font-size:13.5px; color:var(--muted); line-height:1.7; flex:1; }
+  .job-perks { list-style:none; display:flex; flex-direction:column; gap:7px; margin:4px 0; }
+  .job-perks li { font-size:12.5px; color:var(--text); display:flex; align-items:center; gap:8px; }
+  .job-perks li::before { content:'✓'; color:var(--gold); font-weight:700; }
+  .btn-apply {
+    background:var(--navy); color:#fff; border:none;
+    padding:11px 20px; border-radius:6px; font-size:13px; font-weight:600;
+    cursor:pointer; transition:background .2s, transform .1s; width:100%; margin-top:4px;
+  }
+  .btn-apply:hover { background:var(--gold); color:var(--navy); transform:translateY(-1px); }
+  .job-card.featured .btn-apply { background:var(--gold); color:var(--navy); }
+  .job-card.featured .btn-apply:hover { background:var(--navy); color:#fff; }
+  .why-join { background:var(--white); border-radius:14px; padding:40px 36px; margin-bottom:36px; border:1px solid var(--border); }
+  .why-join h3 { font-family:'Playfair Display',serif; font-size:22px; color:var(--navy); margin-bottom:28px; text-align:center; }
+  .why-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+  .why-item { display:flex; gap:14px; align-items:flex-start; }
+  .why-icon { font-size:26px; flex-shrink:0; }
+  .why-item strong { display:block; color:var(--navy); font-size:14px; margin-bottom:5px; }
+  .why-item p { font-size:13px; color:var(--muted); line-height:1.6; }
+  .career-cta-strip {
+    background:var(--navy); border-radius:12px; padding:30px 36px;
+    display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+
   /* animations */
   @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
   .hero h1,.hero p,.hero-label { animation:fadeUp .7s ease both; }
@@ -232,11 +293,16 @@
     .values-grid{ grid-template-columns:1fr 1fr; }
     .ops-banner{ flex-direction:column; text-align:center; }
     .ops-stats{ justify-content:center; }
+    .career-grid{ grid-template-columns:1fr 1fr; }
+    .why-grid{ grid-template-columns:1fr 1fr; }
   }
   @media(max-width:600px){
     .nav-links{ display:none; }
     .about-grid,.mv-cards,.stats-grid,.values-grid,.people-grid,.welfare-benefits,.welfare-grid,.footer-grid{ grid-template-columns:1fr; }
     .people-grid{ grid-template-columns:1fr 1fr; }
+    .career-grid{ grid-template-columns:1fr; }
+    .why-grid{ grid-template-columns:1fr 1fr; }
+    .career-cta-strip{ flex-direction:column; text-align:center; }
   }
 </style>
 </head>
@@ -261,7 +327,6 @@
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-label">About Us</p>
   <h1>Your Partner In<br>Enterprise Security</h1>
   <p>Since 1996, we've been Sri Lanka's trusted security partner for banks, industries, and commercial enterprises.</p>
 </section>
@@ -270,7 +335,6 @@
 <section class="about">
   <div class="about-grid">
     <div class="about-text">
-      <p class="section-label">About Us</p>
       <h2 class="section-title">Three Decades Of Excellence In Security</h2>
       <p>Founded in 1996 by Mr. Sumith Fonseka, an Ex-Commando Regiment Officer, Secure Security &amp; Investigations has grown into one of Sri Lanka's most experienced security organisations — serving commercial, industrial, residential, and banking sectors across the island.</p>
       <div class="about-features">
@@ -490,6 +554,113 @@
     </div>
   </div>
 </div>
+
+<!-- CAREER -->
+<section class="career-section">
+  <div class="career-header">
+    <p class="section-label">Join Our Team</p>
+    <h2 class="section-title">Build Your Career In Security</h2>
+    <p class="career-intro">Be part of Sri Lanka's most trusted security force. We're always looking for disciplined, motivated individuals ready to make a difference.</p>
+  </div>
+
+  <div class="career-grid">
+    <!-- Job Cards -->
+    <div class="job-card">
+      <div class="job-badge">Full Time</div>
+      <div class="job-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Security Officer</h3>
+      <p class="job-location">📍 Colombo &amp; Suburbs</p>
+      <p class="job-desc">Guard commercial premises, banks, and residential complexes. Prior military or police experience preferred.</p>
+      <ul class="job-perks">
+        <li>Free accommodation provided</li>
+        <li>Uniform &amp; equipment supplied</li>
+        <li>EPF / ETF contributions</li>
+      </ul>
+      <button class="btn-apply">Apply Now →</button>
+    </div>
+
+    <div class="job-card featured">
+      <div class="job-badge gold-badge">Urgent Hiring</div>
+      <div class="job-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/></svg>
+      </div>
+      <h3>CCTV &amp; Control Room Operator</h3>
+      <p class="job-location">📍 Colombo – HQ</p>
+      <p class="job-desc">Monitor surveillance systems 24/7, coordinate rapid response, and maintain incident logs with precision.</p>
+      <ul class="job-perks">
+        <li>Shift allowances included</li>
+        <li>Technical training provided</li>
+        <li>Career advancement path</li>
+      </ul>
+      <button class="btn-apply">Apply Now →</button>
+    </div>
+
+    <div class="job-card">
+      <div class="job-badge">Full Time</div>
+      <div class="job-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Field Supervisor</h3>
+      <p class="job-location">📍 Island Wide</p>
+      <p class="job-desc">Lead and supervise security teams across multiple client sites, ensuring standards and protocols are upheld at all times.</p>
+      <ul class="job-perks">
+        <li>Vehicle &amp; fuel allowance</li>
+        <li>Leadership training</li>
+        <li>Performance bonuses</li>
+      </ul>
+      <button class="btn-apply">Apply Now →</button>
+    </div>
+  </div>
+
+  <!-- Why Join Us -->
+  <div class="why-join">
+    <h3>Why Join Secure Security?</h3>
+    <div class="why-grid">
+      <div class="why-item">
+        <span class="why-icon">🎖️</span>
+        <div>
+          <strong>Military-Grade Training</strong>
+          <p>World-class training from ex-military and RAF instructors.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <span class="why-icon">📈</span>
+        <div>
+          <strong>Growth Opportunities</strong>
+          <p>Clear career paths from officer to management level.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <span class="why-icon">🤝</span>
+        <div>
+          <strong>Supportive Culture</strong>
+          <p>A people-first organisation that truly invests in its team.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <span class="why-icon">💰</span>
+        <div>
+          <strong>Competitive Pay</strong>
+          <p>Flexible, on-time pay with full statutory compliance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Strip -->
+  <div class="career-cta-strip">
+    <div>
+      <p style="font-size:13px;color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">Don't See Your Role?</p>
+      <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:22px">Send Us Your CV — We're Always Growing</h3>
+    </div>
+    <a href="mailto:careers@securesecurity.lk" class="btn-quote" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:13px 26px">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email Your CV
+    </a>
+  </div>
+</section>
 
 <!-- WELFARE -->
 <div class="welfare">
